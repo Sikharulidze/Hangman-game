@@ -95,18 +95,6 @@ function App() {
                 How To Play
               </text>
             </svg>
-
-            <p
-              style={{
-                cursor: "pointer",
-                color: "lightblue",
-                textDecoration: "underline",
-                marginTop: "1rem",
-              }}
-              onClick={() => setScreen("rules")}
-            >
-              How to Play
-            </p>
           </div>
         </div>
       )}
