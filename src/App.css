@@ -104,6 +104,43 @@ body,
   padding: 2rem;
 }
 
+.main-categories-div {
+  background-image: url("/images/background-desktop.svg");
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 2rem;
+ 
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 180px);
+  gap: 20px 10px; 
+  padding: 20px;
+  justify-content: center; 
+}
+
+.category-container {
+  background-color: #0B60B0;
+  padding: 25px 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+.category-item{
+  color: whitesmoke;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  transform: scaleY(1.5);
+ 
+}
+
+
+
 .rule-title {
   text-align: center;
   display: block;

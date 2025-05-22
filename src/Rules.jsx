@@ -1,12 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import GradientCircle from "./GradientCircle";
 
-function Rules({ onBack }) {
+function Rules() {
+  const navigate = useNavigate();
+
   return (
     <div className="main-rules-div">
       <h1 className="rules-h1">How to Play</h1>
 
-      <GradientCircle size={55} onClick={onBack}  className="back-button-circle">
+      <GradientCircle
+        size={55}
+        onClick={() => navigate("/")}
+        className="back-button-circle"
+      >
         <img
           src="/images/icon-back.svg"
           alt="Back"
