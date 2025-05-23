@@ -1,10 +1,4 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
 import CategorySelect from "./CategorySelect";
 import GameBoard from "./Gameboard";
 import data from "./data.json";
@@ -12,17 +6,15 @@ import Rules from "./Rules";
 import "./App.css";
 import GradientCircle from "./GradientCircle";
 
-function Home() {
-  const navigate = useNavigate();
-
+function Home({ setScreen }) {
   return (
     <div
       style={{
         backgroundImage: "url(/images/background-desktop.svg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        width: "100%",
-        height: "100%",
+        width: "100vw",
+        height: "100vh",
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
@@ -36,49 +28,31 @@ function Home() {
 
         <GradientCircle
           className="play-button"
-          onClick={() => navigate("/categorySelect")}
+          onClick={() => setScreen("categorySelect")}
         >
           <img src="/images/icon-play.svg" alt="Play" className="play-icon" />
         </GradientCircle>
 
-        <svg
-          width="260"
-          height="62"
-          viewBox="0 0 260 62"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{
-            filter: "drop-shadow(2px 2px 3px black)",
-            cursor: "pointer",
-          }}
-          onClick={() => navigate("/rules")}
+        <div
+          className="rules-button"
           role="button"
           tabIndex={0}
+          onClick={() => setScreen("rules")}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
-              navigate("/rules");
+              setScreen("rules");
             }
           }}
         >
-          <rect width="260" height="62" rx="31" fill="#2463FF" />
-          <text
-            x="130"
-            y="38"
-            fill="white"
-            fontSize="24"
-            fontWeight="bold"
-            textAnchor="middle"
-            alignmentBaseline="middle"
-            style={{ userSelect: "none", pointerEvents: "none" }}
-          >
-            How To Play
-          </text>
-        </svg>
+          <h1 className="home-h1">How To Play</h1>
+        </div>
       </div>
     </div>
   );
 }
 
 function App() {
+  const [screen, setScreen] = useState("home");
   const [category, setCategory] = useState(null);
   const [word, setWord] = useState("");
   const [usedWords, setUsedWords] = useState([]);
@@ -97,37 +71,24 @@ function App() {
       availableWords[Math.floor(Math.random() * availableWords.length)];
     setWord(randomWord);
     setUsedWords([...usedWords, randomWord]);
+    setScreen("game");
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/rules" element={<Rules />} />
-        <Route
-          path="/categorySelect"
-          element={
-            <CategorySelect
-              categories={categories}
-              onSelectCategory={(selectedCategory) => {
-                startGame(selectedCategory);
-                window.location.href = "/game"; // force navigation
-              }}
-              onBack={() => window.history.back()}
-            />
-          }
+    <>
+      {screen === "home" && <Home setScreen={setScreen} />}
+      {screen === "rules" && <Rules setScreen={setScreen} />}
+      {screen === "categorySelect" && (
+        <CategorySelect
+          categories={categories}
+          onSelectCategory={startGame}
+          onBack={() => setScreen("home")}
         />
-        <Route
-          path="/game"
-          element={
-            <GameBoard
-              word={word}
-              onQuit={() => (window.location.href = "/")}
-            />
-          }
-        />
-      </Routes>
-    </Router>
+      )}
+      {screen === "game" && (
+        <GameBoard word={word} onQuit={() => setScreen("home")} />
+      )}
+    </>
   );
 }
 

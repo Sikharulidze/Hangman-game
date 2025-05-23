@@ -7,9 +7,12 @@ body,
   height: 100%;
   width: 100%;
   overflow-x: hidden; 
-  font-family: Arial, sans-serif; 
+  
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
+

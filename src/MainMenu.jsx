@@ -13,18 +13,9 @@ function MainMenu({ onPlay, onShowRules }) {
       >
         Play
       </button>
-      <div
-        onClick={onShowRules}
-        style={{
-          marginTop: "1rem",
-          color: "blue",
-          cursor: "pointer",
-          textDecoration: "underline",
-          fontSize: "1.2rem",
-          userSelect: "none",
-        }}
-      >
-        How to play
+
+      <div onClick={onShowRules}>
+        <h1 className="home-h1">How to play</h1>
       </div>
     </div>
   );
