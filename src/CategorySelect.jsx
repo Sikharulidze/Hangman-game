@@ -1,8 +1,8 @@
 import GradientCircle from "./GradientCircle";
 
-function CategorySelect({ onBack }) {
+function CategorySelect({ onBack, onSelectCategory }) {
   return (
-    <div class="page-wrapper">
+    <div className="page-wrapper">
       <div className="main-categories-div">
         <div className="top-things">
           <GradientCircle

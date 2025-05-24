@@ -52,25 +52,37 @@ function Home({ setScreen }) {
 }
 
 function App() {
+  // Format categories from data.json object to array
+  const formattedCategories = Object.entries(data.categories).map(
+    ([categoryName, items]) => ({
+      name: categoryName,
+      words: items.map((item) => item.name),
+    })
+  );
+
+  const [categories, setCategories] = useState(formattedCategories);
   const [screen, setScreen] = useState("home");
   const [category, setCategory] = useState(null);
   const [word, setWord] = useState("");
   const [usedWords, setUsedWords] = useState([]);
-  const [categories, setCategories] = useState(data.categories);
 
-  const startGame = (selectedCategory) => {
-    setCategory(selectedCategory);
-    const availableWords = selectedCategory.words.filter(
-      (w) => !usedWords.includes(w)
-    );
+  const handleCategorySelect = (categoryName) => {
+    const selected = categories.find((cat) => cat.name === categoryName);
+    if (!selected) return;
+
+    const availableWords = selected.words.filter((w) => !usedWords.includes(w));
+
     if (availableWords.length === 0) {
       alert("No more words left in this category!");
       return;
     }
+
     const randomWord =
       availableWords[Math.floor(Math.random() * availableWords.length)];
+
     setWord(randomWord);
-    setUsedWords([...usedWords, randomWord]);
+    setUsedWords((prev) => [...prev, randomWord]);
+    setCategory(selected);
     setScreen("game");
   };
 
@@ -81,12 +93,12 @@ function App() {
       {screen === "categorySelect" && (
         <CategorySelect
           categories={categories}
-          onSelectCategory={startGame}
+          onSelectCategory={handleCategorySelect}
           onBack={() => setScreen("home")}
         />
       )}
-      {screen === "game" && (
-        <GameBoard word={word} onQuit={() => setScreen("home")} />
+      {screen === "game" && category && word && (
+        <GameBoard word={word} onQuit={() => setScreen("categorySelect")} />
       )}
     </>
   );
