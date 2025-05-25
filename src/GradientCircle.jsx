@@ -1,37 +1,33 @@
 import React from "react";
 
-function GradientCircle({ size = 160, children, onClick, className }) {
+function GradientCircle({ size = 160, children, onClick, className = "" }) {
   const radius = size / 2;
 
   return (
     <div
       onClick={onClick}
-      className={className}
-      style={{
-        width: size,
-        height: size,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: onClick ? "pointer" : "default",
-        position: "relative",
-      }}
+      className={`gradient-c ${className}`}
+      style={{ width: size, height: size }}
     >
       <svg
+        className="gradient-svg"
         width={size}
         height={size}
         viewBox={`0 0 ${size} ${size}`}
         xmlns="http://www.w3.org/2000/svg"
-        style={{ position: "absolute", top: 0, left: 0 }}
       >
         <defs>
-          {/* Main gradient background */}
           <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#FE71FE" />
             <stop offset="100%" stopColor="#7199FF" />
           </linearGradient>
 
-          {/* Black outer drop shadow */}
+          <linearGradient id="grad-hover" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#E6C6FF" />{" "}
+            {/* lighter purple / white mixed */}
+            <stop offset="100%" stopColor="#B8A3FF" /> {/* lighter purple */}
+          </linearGradient>
+
           <filter id="outerShadow" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow
               dx="0"
@@ -42,7 +38,6 @@ function GradientCircle({ size = 160, children, onClick, className }) {
             />
           </filter>
 
-          {/* Inner purple blur */}
           <filter
             id="innerShadowPurple"
             x="-50%"
@@ -64,8 +59,8 @@ function GradientCircle({ size = 160, children, onClick, className }) {
           </filter>
         </defs>
 
-        {/* Main circle with outer shadow */}
         <circle
+          className="gradient-circle-shape"
           cx={radius}
           cy={radius}
           r={radius - 1.5}
@@ -75,8 +70,8 @@ function GradientCircle({ size = 160, children, onClick, className }) {
           filter="url(#outerShadow)"
         />
 
-        {/* Inner bottom purple shadow effect (half-circle blurred mask) */}
         <path
+          className="inner-shadow-shape"
           d={`
             M ${radius - radius * 0.9} ${radius}
             A ${radius * 0.9} ${radius * 0.9} 0 0 1 ${
@@ -92,7 +87,7 @@ function GradientCircle({ size = 160, children, onClick, className }) {
         />
       </svg>
 
-      <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+      <div className="gradient-content">{children}</div>
     </div>
   );
 }

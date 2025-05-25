@@ -44,6 +44,11 @@ body,
   justify-content: center;
   align-items: center;
   margin-left: 100px;
+  cursor: pointer;
+}
+
+.rules-button:hover {
+  background-color: #4a7eff;
 }
 
 .logo-image {
@@ -120,7 +125,6 @@ body,
   padding: 0;
   box-sizing: border-box;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .category-container:hover {
@@ -256,4 +260,30 @@ body,
   font-size: 26px;
   text-align: center;
   line-height: 40px;
+}
+
+/* for circle play button */
+
+.gradient-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.gradient-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.gradient-content {
+  position: relative;
+  z-index: 1;
+}
+
+.gradient-c:hover svg .gradient-circle-shape {
+  fill: url(#grad-hover);
+  transition: fill 0.3s ease;
 }
