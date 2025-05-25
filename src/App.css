@@ -84,7 +84,6 @@ body,
   justify-content: center;
 }
 
-
 .home-h1 {
   font-size: 32px;
   letter-spacing: 5px;
@@ -120,6 +119,12 @@ body,
   height: 190px;
   padding: 0;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-container:hover {
+  background-color: #4c7cff;
 }
 
 .category-item-wrapper {
