@@ -6,69 +6,92 @@ function GameBoard({ word, onQuit, category }) {
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const maxWrongGuesses = 8;
 
-  const displayedWord = word
-    .split("")
-    .map((letter) => (guessedLetters.includes(letter) ? letter : "_"))
-    .join(" ");
+  const displayedWordArray = word.split("");
 
   const guessLetter = (letter) => {
     if (guessedLetters.includes(letter)) return;
 
     setGuessedLetters([...guessedLetters, letter]);
 
-    if (!word.includes(letter)) {
+    if (!word.toLowerCase().includes(letter.toLowerCase())) {
       setWrongGuesses(wrongGuesses + 1);
     }
   };
 
-  const isWin = word
-    .split("")
-    .every((letter) => guessedLetters.includes(letter));
+  const isWin = displayedWordArray
+    .filter((l) => l !== " ")
+    .every((letter) => guessedLetters.includes(letter.toLowerCase()));
   const isLose = wrongGuesses >= maxWrongGuesses;
 
   return (
     <div className="game-board">
       {/* HEADER */}
       <div className="game-header">
-        <div className="left">
-          <GradientCircle
-            size={94}
-            className="menu-circle"
-            onClick={() => console.log("Menu clicked")}
-          >
-            <img
-              src="/images/icon-menu.svg"
-              alt="Menu Icon"
-              className="menu-icon-inside"
-            />
-          </GradientCircle>
-          <span className="category-text">{category}</span>
-        </div>
-        <div className="right">
-          <div className="progress-bar">
-            <div
-              className="fill"
-              style={{
-                width: `${
-                  ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 240
-                }px`,
-              }}
-            />
-          </div>
+        <GradientCircle
+          size={94}
+          className="menu-circle"
+          onClick={() => console.log("Menu clicked")}
+        >
           <img
-            src="/images/icon-heart.svg"
-            alt="Heart Icon"
-            className="heart-icon"
+            src="/images/icon-menu.svg"
+            alt="Menu Icon"
+            className="menu-icon-inside"
+          />
+        </GradientCircle>
+
+        <h2 className="guess-title">Countries</h2>
+
+        <div className="progress-bar">
+          <div
+            className="fill"
+            style={{
+              width: `${((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 240}px`,
+            }}
           />
         </div>
+
+        <img
+          src="/images/icon-heart.svg"
+          alt="Heart Icon"
+          className="heart-icon"
+        />
       </div>
 
       {/* WORD DISPLAY */}
-      <h2 className="guess-title">Countries</h2>
-      <p className="word-display">{displayedWord}</p>
-      <p className="guess-count">
-        Wrong guesses: {wrongGuesses} / {maxWrongGuesses}
-      </p>
+      <div className="word-display">
+        {(() => {
+          const middleIndex = Math.floor(displayedWordArray.length / 2);
+          const firstRow = displayedWordArray.slice(0, middleIndex);
+          const secondRow = displayedWordArray.slice(middleIndex);
+
+          const renderRow = (row, rowIdx) => (
+            <div key={rowIdx} className="letter-row">
+              {row.map((letter, idx) => {
+                if (letter === " ") {
+                  return <div key={idx} className="letter-box space-box" />;
+                }
+
+                const isGuessed = guessedLetters.includes(letter.toLowerCase());
+
+                return (
+                  <div key={idx} className={`letter-box ${isGuessed ? "filled" : ""}`}>
+                    <span className="letter-text">
+                      {isGuessed ? letter.toUpperCase() : ""}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          );
+
+          return (
+            <>
+              {renderRow(firstRow, 0)}
+              {renderRow(secondRow, 1)}
+            </>
+          );
+        })()}
+      </div>
 
       {/* GAME STATUS */}
       {isWin && <p className="game-result">🎉 You won!</p>}

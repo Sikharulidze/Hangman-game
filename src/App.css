@@ -283,18 +283,14 @@ body,
   z-index: 1;
 }
 
-.gradient-c:hover svg .gradient-circle-shape {
-  fill: url(#grad-hover);
-  transition: fill 0.3s ease;
-}
-
 /* === GameBoard Header Styles === */
 .game-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
-  margin-bottom: 1.5rem;
+  width: 1216px;
+  height: 106px;
+  margin: 0 auto;
 }
 
 .game-header .left {
@@ -309,6 +305,10 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.menu-circle:hover {
+  filter: brightness(1.2);
 }
 
 .menu-icon-inside {
@@ -337,11 +337,12 @@ body,
   width: 240px;
   height: 31px;
   border-radius: 40px;
-  overflow: hidden;
   background-color: white;
   position: relative;
   display: inline-block;
   vertical-align: middle;
+  margin-left: 489px;
+  margin-right: 40px;
 }
 
 .fill {
@@ -357,14 +358,50 @@ body,
 
 /* === Other GameBoard Elements === */
 .guess-title {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  width: 243px;
+  font-size: 88px;
+  height: 106px;
+  margin-left: 57px;
 }
 
 .word-display {
-  font-size: 2rem;
-  letter-spacing: 0.2rem;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.letter-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.letter-box {
+  width: 112px;
+  height: 128px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: rgba(36, 99, 255, 0.4);
+  user-select: none;
+  color: transparent;
+}
+
+.letter-box.filled {
+  background-color: #2463ff;
+}
+
+.letter-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
 }
 
 .guess-count,
@@ -379,14 +416,15 @@ body,
   font-size: 1rem;
   border: none;
   border-radius: 4px;
-  background-color: #222;
+  background-color: #1b1b2f;
   color: white;
   cursor: pointer;
 }
 
 .keyboard button:disabled {
-  opacity: 0.4;
   cursor: not-allowed;
+  color: #888;
+  background-color: #ccc;
 }
 
 .quit-button {
