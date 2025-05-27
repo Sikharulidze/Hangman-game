@@ -410,23 +410,6 @@ body,
   margin-bottom: 1rem;
 }
 
-.keyboard button {
-  margin: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #1b1b2f;
-  color: white;
-  cursor: pointer;
-}
-
-.keyboard button:disabled {
-  cursor: not-allowed;
-  color: #888;
-  background-color: #ccc;
-}
-
 .quit-button {
   margin-top: 1rem;
   background-color: #ff4c4c;
@@ -447,3 +430,68 @@ body,
   box-sizing: border-box;
   color: white;
 }
+
+/* Container for the whole keyboard, centered on page */
+.keyboard-container {
+  width: 1173px;
+  height: 300px;
+  margin: 120px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 10px;
+}
+
+.keyboard-letter-box {
+  width: 109px;
+  height: 84px;
+  background-color: white;
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.keyboard-letter-box.guessed {
+  background-color: #ffffff99;
+}
+
+.keyboard-letter-button {
+  
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 24px;
+  color: navy;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  user-select: none;
+   pointer-events: auto;
+}
+
+
+
+.keyboard-letter-button:disabled {
+  cursor: not-allowed;
+}
+
+.keyboard-letter-button:not(:disabled):hover {
+  background-color: #e0e0ff;
+  border-radius: 24px;
+}
+

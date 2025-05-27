@@ -45,7 +45,9 @@ function GameBoard({ word, onQuit, category }) {
           <div
             className="fill"
             style={{
-              width: `${((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 240}px`,
+              width: `${
+                ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 240
+              }px`,
             }}
           />
         </div>
@@ -74,7 +76,10 @@ function GameBoard({ word, onQuit, category }) {
                 const isGuessed = guessedLetters.includes(letter.toLowerCase());
 
                 return (
-                  <div key={idx} className={`letter-box ${isGuessed ? "filled" : ""}`}>
+                  <div
+                    key={idx}
+                    className={`letter-box ${isGuessed ? "filled" : ""}`}
+                  >
                     <span className="letter-text">
                       {isGuessed ? letter.toUpperCase() : ""}
                     </span>
@@ -101,16 +106,35 @@ function GameBoard({ word, onQuit, category }) {
 
       {/* KEYBOARD */}
       {!isWin && !isLose && (
-        <div className="keyboard">
-          {"abcdefghijklmnopqrstuvwxyz".split("").map((letter) => (
-            <button
-              key={letter}
-              onClick={() => guessLetter(letter)}
-              disabled={guessedLetters.includes(letter)}
-            >
-              {letter}
-            </button>
-          ))}
+        <div className="keyboard-container">
+          <div className="keyboard-inner">
+            {["abcdefghi", "jklmnopqr", "stuvwxyz"].map((row, rowIdx) => (
+              <div key={rowIdx} className="keyboard-row">
+                {row.split("").map((letter) => {
+                  const isGuessed = guessedLetters.includes(letter);
+                  return (
+                    <div
+  key={letter}
+  className={`keyboard-letter-box keyboard-letter-box-${letter} ${
+    guessedLetters.includes(letter) ? "guessed" : ""
+  }`}
+>
+  <button
+    onClick={() => guessLetter(letter)}
+    disabled={isGuessed}
+    className="keyboard-letter-button"
+  >
+    <span className={`keyboard-letter-text keyboard-letter-text-${letter}`}>
+      {letter.toUpperCase()}
+    </span>
+  </button>
+</div>
+
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
