@@ -348,10 +348,9 @@ body,
 .fill {
   position: absolute;
   top: 30%;
-  width: 0;
   height: 13px;
   background-color: navy;
-  left: 11px;
+  left: 8px;
   max-width: 220px;
   border-radius: 8px;
 }
@@ -469,7 +468,6 @@ body,
 }
 
 .keyboard-letter-button {
-  
   background: none;
   border: none;
   font-weight: bold;
@@ -481,10 +479,8 @@ body,
   align-items: center;
   padding: 0;
   user-select: none;
-   pointer-events: auto;
+  pointer-events: auto;
 }
-
-
 
 .keyboard-letter-button:disabled {
   cursor: not-allowed;
@@ -495,3 +491,98 @@ body,
   border-radius: 24px;
 }
 
+/* for paused menu thing*/
+
+.game-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(2.5px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 900;
+}
+
+.paused-menu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 592px;
+  height: 445px;
+  background-color: #001479;
+  border-radius: 12px;
+  box-shadow: inset 10px 30px 30px 2px #344aba,
+    inset -20px 20px 15px -8px #344aba, 0 0 20px rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  border-radius: 40px;
+  z-index: 1000;
+}
+
+.paused-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 20px;
+  z-index: 10;
+}
+
+/* Actual paused text */
+.paused {
+  font-size: 6rem;
+  color: #b3dbff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.pause-buttons {
+  height: 55px;
+  padding: 0;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  background-color: #2463ff;
+}
+
+.pause-buttons.white-text {
+  color: white;
+}
+
+.pause-popup-button:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.pause-popup-button:active {
+  background-color: #333;
+}
+
+.pause-buttons.quit-button {
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  width: 235px;
+}
+
+.pause-buttons.quit-button:hover {
+  background-color: #b71c1c;
+}
+
+.continue-button {
+  width: 226px;
+  color: white;
+  margin-top: 50px;
+}
+
+.new-category-button {
+  width: 275px;
+  color: white;
+}

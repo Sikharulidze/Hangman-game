@@ -98,7 +98,11 @@ function App() {
         />
       )}
       {screen === "game" && category && word && (
-        <GameBoard word={word} onQuit={() => setScreen("categorySelect")} />
+        <GameBoard
+          word={word}
+          onQuit={() => setScreen("home")}
+          goToCategory={() => setScreen("categorySelect")}
+        />
       )}
     </>
   );

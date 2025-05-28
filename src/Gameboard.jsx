@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import GradientCircle from "./GradientCircle";
 
-function GameBoard({ word, onQuit, category }) {
+function GameBoard({ word, onQuit, goToCategory }) {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
   const maxWrongGuesses = 8;
 
   const displayedWordArray = word.split("");
@@ -30,7 +31,7 @@ function GameBoard({ word, onQuit, category }) {
         <GradientCircle
           size={94}
           className="menu-circle"
-          onClick={() => console.log("Menu clicked")}
+          onClick={() => setMenuOpen(true)}
         >
           <img
             src="/images/icon-menu.svg"
@@ -58,6 +59,45 @@ function GameBoard({ word, onQuit, category }) {
           className="heart-icon"
         />
       </div>
+
+      {/* PAUSE POPUP */}
+      {menuOpen && (
+        <>
+          <div className="game-overlay"></div>
+          <div className="paused-menu">
+            <div className="paused-wrapper">
+              <h1 className="paused">Paused</h1>
+            </div>
+
+            <button
+              className="pause-buttons  continue-button"
+              onClick={() => setMenuOpen(false)}
+            >
+              CONTINUE
+            </button>
+
+            <button
+              className="pause-buttons new-category-button"
+              onClick={() => {
+                setMenuOpen(false);
+                goToCategory();
+              }}
+            >
+              NEW CATEGORY
+            </button>
+
+            <button
+              className="pause-buttons quit-button"
+              onClick={() => {
+                setMenuOpen(false);
+                onQuit();
+              }}
+            >
+              QUIT GAME
+            </button>
+          </div>
+        </>
+      )}
 
       {/* WORD DISPLAY */}
       <div className="word-display">
@@ -114,22 +154,23 @@ function GameBoard({ word, onQuit, category }) {
                   const isGuessed = guessedLetters.includes(letter);
                   return (
                     <div
-  key={letter}
-  className={`keyboard-letter-box keyboard-letter-box-${letter} ${
-    guessedLetters.includes(letter) ? "guessed" : ""
-  }`}
->
-  <button
-    onClick={() => guessLetter(letter)}
-    disabled={isGuessed}
-    className="keyboard-letter-button"
-  >
-    <span className={`keyboard-letter-text keyboard-letter-text-${letter}`}>
-      {letter.toUpperCase()}
-    </span>
-  </button>
-</div>
-
+                      key={letter}
+                      className={`keyboard-letter-box keyboard-letter-box-${letter} ${
+                        guessedLetters.includes(letter) ? "guessed" : ""
+                      }`}
+                    >
+                      <button
+                        onClick={() => guessLetter(letter)}
+                        disabled={isGuessed}
+                        className="keyboard-letter-button"
+                      >
+                        <span
+                          className={`keyboard-letter-text keyboard-letter-text-${letter}`}
+                        >
+                          {letter.toUpperCase()}
+                        </span>
+                      </button>
+                    </div>
                   );
                 })}
               </div>
@@ -137,11 +178,6 @@ function GameBoard({ word, onQuit, category }) {
           </div>
         </div>
       )}
-
-      {/* QUIT BUTTON */}
-      <button onClick={onQuit} className="quit-button">
-        Quit
-      </button>
     </div>
   );
 }
