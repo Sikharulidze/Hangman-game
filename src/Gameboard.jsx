@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import GradientCircle from "./GradientCircle";
 
-function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
+function GameBoard({
+  word,
+  category = "Countries",
+  onQuit,
+  goToCategory,
+  onContinueGame,
+}) {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -126,12 +132,26 @@ function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
               </h1>
             </div>
 
-            <button
-              className="pause-buttons continue-button"
-              onClick={handlePlayAgain}
-            >
-              PLAY AGAIN
-            </button>
+            {isWin ? (
+              <button
+                className="pause-buttons continue-button"
+                onClick={() => {
+                  onContinueGame();
+                  setGuessedLetters([]);
+                  setWrongGuesses(0);
+                  setGameEnded(false);
+                }}
+              >
+                CONTINUE GAME
+              </button>
+            ) : (
+              <button
+                className="pause-buttons continue-button"
+                onClick={handlePlayAgain}
+              >
+                PLAY AGAIN
+              </button>
+            )}
 
             <button
               className="pause-buttons new-category-button"

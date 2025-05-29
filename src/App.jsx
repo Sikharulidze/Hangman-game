@@ -86,6 +86,23 @@ function App() {
     setScreen("game");
   };
 
+  const handleContinueGame = () => {
+    if (!category) return;
+
+    const availableWords = category.words.filter((w) => !usedWords.includes(w));
+
+    if (availableWords.length === 0) {
+      alert("No more words left in this category!");
+      setScreen("categorySelect");
+      return;
+    }
+
+    const newWord =
+      availableWords[Math.floor(Math.random() * availableWords.length)];
+    setUsedWords((prev) => [...prev, newWord]);
+    setWord(newWord);
+  };
+
   return (
     <>
       {screen === "home" && <Home setScreen={setScreen} />}
@@ -103,6 +120,7 @@ function App() {
           category={category.name}
           onQuit={() => setScreen("home")}
           goToCategory={() => setScreen("categorySelect")}
+          onContinueGame={handleContinueGame}
         />
       )}
     </>
