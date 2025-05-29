@@ -11,18 +11,21 @@ function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
   const displayedWordArray = word.split("");
 
   const guessLetter = (letter) => {
-    if (guessedLetters.includes(letter) || gameEnded) return;
+    const upperLetter = letter.toUpperCase();
 
-    setGuessedLetters([...guessedLetters, letter]);
+    if (guessedLetters.includes(upperLetter) || gameEnded) return;
 
-    if (!word.toLowerCase().includes(letter.toLowerCase())) {
+    setGuessedLetters([...guessedLetters, upperLetter]);
+
+    if (!word.toUpperCase().includes(upperLetter)) {
       setWrongGuesses(wrongGuesses + 1);
     }
   };
 
   const isWin = displayedWordArray
     .filter((l) => l !== " ")
-    .every((letter) => guessedLetters.includes(letter.toLowerCase()));
+    .every((letter) => guessedLetters.includes(letter.toUpperCase()));
+
   const isLose = wrongGuesses >= maxWrongGuesses;
 
   useEffect(() => {
@@ -167,7 +170,7 @@ function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
                   return <div key={idx} className="letter-box space-box" />;
                 }
 
-                const isGuessed = guessedLetters.includes(letter.toLowerCase());
+                const isGuessed = guessedLetters.includes(letter.toUpperCase());
 
                 return (
                   <div
@@ -199,7 +202,8 @@ function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
             {["abcdefghi", "jklmnopqr", "stuvwxyz"].map((row, rowIdx) => (
               <div key={rowIdx} className="keyboard-row">
                 {row.split("").map((letter) => {
-                  const isGuessed = guessedLetters.includes(letter);
+                  const upperLetter = letter.toUpperCase();
+                  const isGuessed = guessedLetters.includes(upperLetter);
                   return (
                     <div
                       key={letter}
@@ -208,14 +212,14 @@ function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
                       }`}
                     >
                       <button
-                        onClick={() => guessLetter(letter)}
+                        onClick={() => guessLetter(upperLetter)}
                         disabled={isGuessed}
                         className="keyboard-letter-button"
                       >
                         <span
                           className={`keyboard-letter-text keyboard-letter-text-${letter}`}
                         >
-                          {letter.toUpperCase()}
+                          {upperLetter}
                         </span>
                       </button>
                     </div>
