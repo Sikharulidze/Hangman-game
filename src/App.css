@@ -586,3 +586,12 @@ body,
   width: 275px;
   color: white;
 }
+
+.game-result-heading {
+  font-size: 5rem;
+  text-align: center;
+  white-space: nowrap;
+  margin-bottom: 2rem;
+  color: #67b6ff;
+  text-transform: none;
+}

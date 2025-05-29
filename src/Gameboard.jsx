@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GradientCircle from "./GradientCircle";
 
-function GameBoard({ word, onQuit, goToCategory }) {
+function GameBoard({ word, category = "Countries", onQuit, goToCategory }) {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
   const maxWrongGuesses = 8;
 
   const displayedWordArray = word.split("");
 
   const guessLetter = (letter) => {
-    if (guessedLetters.includes(letter)) return;
+    if (guessedLetters.includes(letter) || gameEnded) return;
 
     setGuessedLetters([...guessedLetters, letter]);
 
@@ -23,6 +24,18 @@ function GameBoard({ word, onQuit, goToCategory }) {
     .filter((l) => l !== " ")
     .every((letter) => guessedLetters.includes(letter.toLowerCase()));
   const isLose = wrongGuesses >= maxWrongGuesses;
+
+  useEffect(() => {
+    if ((isWin || isLose) && !gameEnded) {
+      setGameEnded(true);
+    }
+  }, [isWin, isLose, gameEnded]);
+
+  const handlePlayAgain = () => {
+    setGuessedLetters([]);
+    setWrongGuesses(0);
+    setGameEnded(false);
+  };
 
   return (
     <div className="game-board">
@@ -40,7 +53,7 @@ function GameBoard({ word, onQuit, goToCategory }) {
           />
         </GradientCircle>
 
-        <h2 className="guess-title">Countries</h2>
+        <h2 className="guess-title">{category}</h2>
 
         <div className="progress-bar">
           <div
@@ -70,7 +83,7 @@ function GameBoard({ word, onQuit, goToCategory }) {
             </div>
 
             <button
-              className="pause-buttons  continue-button"
+              className="pause-buttons continue-button"
               onClick={() => setMenuOpen(false)}
             >
               CONTINUE
@@ -90,6 +103,47 @@ function GameBoard({ word, onQuit, goToCategory }) {
               className="pause-buttons quit-button"
               onClick={() => {
                 setMenuOpen(false);
+                onQuit();
+              }}
+            >
+              QUIT GAME
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* GAME END SCREEN */}
+      {gameEnded && (
+        <>
+          <div className="game-overlay"></div>
+          <div className="paused-menu">
+            <div className="paused-wrapper">
+              <h1 className="paused game-result-heading">
+                {isWin ? "You Win" : "You Lose"}
+              </h1>
+            </div>
+
+            <button
+              className="pause-buttons continue-button"
+              onClick={handlePlayAgain}
+            >
+              PLAY AGAIN
+            </button>
+
+            <button
+              className="pause-buttons new-category-button"
+              onClick={() => {
+                setGameEnded(false);
+                goToCategory();
+              }}
+            >
+              NEW CATEGORY
+            </button>
+
+            <button
+              className="pause-buttons quit-button"
+              onClick={() => {
+                setGameEnded(false);
                 onQuit();
               }}
             >
@@ -138,14 +192,8 @@ function GameBoard({ word, onQuit, goToCategory }) {
         })()}
       </div>
 
-      {/* GAME STATUS */}
-      {isWin && <p className="game-result">🎉 You won!</p>}
-      {isLose && (
-        <p className="game-result">😞 You lost! The word was: {word}</p>
-      )}
-
       {/* KEYBOARD */}
-      {!isWin && !isLose && (
+      {!gameEnded && (
         <div className="keyboard-container">
           <div className="keyboard-inner">
             {["abcdefghi", "jklmnopqr", "stuvwxyz"].map((row, rowIdx) => (
@@ -156,7 +204,7 @@ function GameBoard({ word, onQuit, goToCategory }) {
                     <div
                       key={letter}
                       className={`keyboard-letter-box keyboard-letter-box-${letter} ${
-                        guessedLetters.includes(letter) ? "guessed" : ""
+                        isGuessed ? "guessed" : ""
                       }`}
                     >
                       <button
