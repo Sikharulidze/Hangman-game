@@ -270,6 +270,7 @@ body,
   align-items: center;
   position: relative;
   cursor: pointer;
+  
 }
 
 .gradient-svg {
@@ -594,4 +595,34 @@ body,
   margin-bottom: 2rem;
   color: #67b6ff;
   text-transform: none;
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .back-icon {
+    width: 27px;
+    height: 25px;
+  }
+
+.top-rules {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  width: 620px;
+  height: 125px;
+}
+
+
+
+}
+
+@media (max-width: 767px) {
+  .back-icon {
+    width: 17px;
+    height: 16px;
+  }
 }
