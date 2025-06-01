@@ -1,19 +1,37 @@
 import GradientCircle from "./GradientCircle";
+import React, { useState, useEffect } from "react";
 
 function CategorySelect({ onBack, onSelectCategory }) {
+   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setViewportWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  let circleSize = 94; // default for desktop
+  if (viewportWidth <= 767) {
+    circleSize = 40; // mobile
+  } else if (viewportWidth >= 768 && viewportWidth <= 1024) {
+    circleSize = 64; // tablet
+  }
   return (
     <div className="page-wrapper">
       <div className="main-categories-div">
         <div className="top-things">
           <GradientCircle
-            size={94}
+            size={circleSize}
             onClick={onBack}
             className="back-button-circle"
           >
             <img
               src="/images/icon-back.svg"
               alt="Back"
-              style={{ width: 41, height: 38 }}
+              className="back-icon2"
             />
           </GradientCircle>
 
