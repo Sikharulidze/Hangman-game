@@ -2,7 +2,7 @@ import GradientCircle from "./GradientCircle";
 import React, { useState, useEffect } from "react";
 
 function CategorySelect({ onBack, onSelectCategory }) {
-   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     function handleResize() {

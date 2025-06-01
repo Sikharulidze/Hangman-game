@@ -597,41 +597,49 @@ body,
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
- 
-  .back-icon2{
+  .back-icon2 {
     width: 27px;
     height: 25px;
-   
   }
 
- .categories-box{
-
-  width: 100%;  
- }
-
-
-
- .items-container{
- width: 100%;
-  display: flex;
-  justify-content: center;
- }
-
- 
-
-  .categories-h1{
-    font-size: 6rem;
-   
+  .categories-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
   }
 
-  .top-things{
+  .category-container {
+    width: 324px;
+   min-height: 180px;
+  }
+
+  .main-categories-div {
+    justify-content: flex-start;
+    padding-top: 61px;
+  }
+
+  .items-container {
+    width: 100%;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .top-things {
     width: 100%;
     margin-left: 50px;
     display: flex;
     align-items: center;
-     gap: 90px;
+    gap: 90px;
   }
-  
+
+  .categories-h1 {
+    font-size: 6rem;
+  }
 
   /* for rules page*/
 
@@ -673,7 +681,7 @@ body,
     min-width: 80px;
   }
 
- .back-icon {
+  .back-icon {
     width: 27px;
     height: 25px;
   }
@@ -685,7 +693,7 @@ body,
     flex-grow: 1;
   }
 
-    .top-rules {
+  .top-rules {
     display: flex;
     align-items: center;
     gap: 60px;
@@ -695,7 +703,6 @@ body,
     max-width: 680px;
     margin-bottom: 20px;
   }
-
 
   .rule-title {
     font-size: 2rem;
