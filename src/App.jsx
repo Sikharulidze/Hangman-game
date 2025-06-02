@@ -52,7 +52,6 @@ function Home({ setScreen }) {
 }
 
 function App() {
-  // Format categories from data.json object to array
   const formattedCategories = Object.entries(data.categories).map(
     ([categoryName, items]) => ({
       name: categoryName,
@@ -63,44 +62,49 @@ function App() {
   const [categories, setCategories] = useState(formattedCategories);
   const [screen, setScreen] = useState("home");
   const [category, setCategory] = useState(null);
-  const [word, setWord] = useState("");
   const [usedWords, setUsedWords] = useState([]);
+  const [currentWordd, setCurrentWordd] = useState("");
+
+  const getNewWordFromCategory = (selectedCategory = category) => {
+    if (!selectedCategory) return "";
+
+    const availableWords = selectedCategory.words.filter(
+      (word) => !usedWords.includes(word)
+    );
+
+    if (availableWords.length === 0) {
+      alert("No more words left in this category!");
+      return "";
+    }
+
+    const newWord =
+      availableWords[Math.floor(Math.random() * availableWords.length)];
+
+    setUsedWords((prev) => [...prev, newWord]);
+    return newWord;
+  };
+
+  const getNewWord = () => {
+    const newWord = getNewWordFromCategory();
+    if (newWord) {
+      setCurrentWordd(newWord);
+    }
+  };
 
   const handleCategorySelect = (categoryName) => {
     const selected = categories.find((cat) => cat.name === categoryName);
     if (!selected) return;
 
-    const availableWords = selected.words.filter((w) => !usedWords.includes(w));
-
-    if (availableWords.length === 0) {
-      alert("No more words left in this category!");
-      return;
+    const newWord = getNewWordFromCategory(selected);
+    if (newWord) {
+      setCategory(selected);
+      setCurrentWordd(newWord);
+      setScreen("game");
     }
-
-    const randomWord =
-      availableWords[Math.floor(Math.random() * availableWords.length)];
-
-    setWord(randomWord);
-    setUsedWords((prev) => [...prev, randomWord]);
-    setCategory(selected);
-    setScreen("game");
   };
 
   const handleContinueGame = () => {
-    if (!category) return;
-
-    const availableWords = category.words.filter((w) => !usedWords.includes(w));
-
-    if (availableWords.length === 0) {
-      alert("No more words left in this category!");
-      setScreen("categorySelect");
-      return;
-    }
-
-    const newWord =
-      availableWords[Math.floor(Math.random() * availableWords.length)];
-    setUsedWords((prev) => [...prev, newWord]);
-    setWord(newWord);
+    getNewWord();
   };
 
   return (
@@ -114,13 +118,14 @@ function App() {
           onBack={() => setScreen("home")}
         />
       )}
-      {screen === "game" && category && word && (
+      {screen === "game" && category && currentWordd && (
         <GameBoard
-          word={word}
+          word={currentWordd}
           category={category.name}
           onQuit={() => setScreen("home")}
           goToCategory={() => setScreen("categorySelect")}
           onContinueGame={handleContinueGame}
+          onPlayAgain={getNewWord}
         />
       )}
     </>

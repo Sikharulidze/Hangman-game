@@ -7,6 +7,7 @@ function GameBoard({
   onQuit,
   goToCategory,
   onContinueGame,
+   onPlayAgain,
 }) {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
@@ -40,6 +41,7 @@ function GameBoard({
   }, [isWin, isLose, gameEnded]);
 
   const handlePlayAgain = () => {
+    onPlayAgain();   
     setGuessedLetters([]);
     setWrongGuesses(0);
     setGameEnded(false);
