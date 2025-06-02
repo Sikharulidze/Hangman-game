@@ -18,13 +18,12 @@ function GameBoard({
 
   const guessLetter = (letter) => {
     const upperLetter = letter.toUpperCase();
-
-    if (guessedLetters.includes(upperLetter) || gameEnded) return;
+    if (guessedLetters.includes(upperLetter) || gameEnded || menuOpen) return;
 
     setGuessedLetters([...guessedLetters, upperLetter]);
 
     if (!word.toUpperCase().includes(upperLetter)) {
-      setWrongGuesses(wrongGuesses + 1);
+      setWrongGuesses((prev) => prev + 1);
     }
   };
 
@@ -44,6 +43,7 @@ function GameBoard({
     setGuessedLetters([]);
     setWrongGuesses(0);
     setGameEnded(false);
+    setMenuOpen(false);
   };
 
   return (
@@ -64,12 +64,13 @@ function GameBoard({
 
         <h2 className="guess-title">{category}</h2>
 
+        {/* UPDATED PROGRESS BAR */}
         <div className="progress-bar">
           <div
             className="fill"
             style={{
               width: `${
-                ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 240
+                ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 140
               }px`,
             }}
           />
@@ -190,7 +191,9 @@ function GameBoard({
                   return <div key={idx} className="letter-box space-box" />;
                 }
 
-                const isGuessed = guessedLetters.includes(letter.toUpperCase());
+                const isGuessed = guessedLetters.includes(
+                  letter.toUpperCase()
+                );
 
                 return (
                   <div
@@ -216,40 +219,44 @@ function GameBoard({
       </div>
 
       {/* KEYBOARD */}
-      {!gameEnded && (
-        <div className="keyboard-container">
-          <div className="keyboard-inner">
-            {["abcdefghi", "jklmnopqr", "stuvwxyz"].map((row, rowIdx) => (
-              <div key={rowIdx} className="keyboard-row">
-                {row.split("").map((letter) => {
-                  const upperLetter = letter.toUpperCase();
-                  const isGuessed = guessedLetters.includes(upperLetter);
-                  return (
-                    <div
-                      key={letter}
-                      className={`keyboard-letter-box keyboard-letter-box-${letter} ${
-                        isGuessed ? "guessed" : ""
-                      }`}
+      <div
+        className="keyboard-container"
+        style={{
+          pointerEvents: menuOpen || gameEnded ? "none" : "auto",
+          opacity: menuOpen || gameEnded ? 0.6 : 1,
+        }}
+      >
+        <div className="keyboard-inner">
+          {["abcdefghi", "jklmnopqr", "stuvwxyz"].map((row, rowIdx) => (
+            <div key={rowIdx} className="keyboard-row">
+              {row.split("").map((letter) => {
+                const upperLetter = letter.toUpperCase();
+                const isGuessed = guessedLetters.includes(upperLetter);
+                return (
+                  <div
+                    key={letter}
+                    className={`keyboard-letter-box keyboard-letter-box-${letter} ${
+                      isGuessed ? "guessed" : ""
+                    }`}
+                  >
+                    <button
+                      onClick={() => guessLetter(upperLetter)}
+                      disabled={isGuessed || menuOpen || gameEnded}
+                      className="keyboard-letter-button"
                     >
-                      <button
-                        onClick={() => guessLetter(upperLetter)}
-                        disabled={isGuessed}
-                        className="keyboard-letter-button"
+                      <span
+                        className={`keyboard-letter-text keyboard-letter-text-${letter}`}
                       >
-                        <span
-                          className={`keyboard-letter-text keyboard-letter-text-${letter}`}
-                        >
-                          {upperLetter}
-                        </span>
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
+                        {upperLetter}
+                      </span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
