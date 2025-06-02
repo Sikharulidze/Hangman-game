@@ -139,7 +139,6 @@ function GameBoard({
                 onClick={() => {
                   onContinueGame();
                   setGuessedLetters([]);
-                  setWrongGuesses(0);
                   setGameEnded(false);
                 }}
               >
