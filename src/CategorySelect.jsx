@@ -13,12 +13,13 @@ function CategorySelect({ onBack, onSelectCategory }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  let circleSize = 94; // default for desktop
+  let circleSize = 94;
   if (viewportWidth <= 767) {
-    circleSize = 40; // mobile
+    circleSize = 50;
   } else if (viewportWidth >= 768 && viewportWidth <= 1024) {
-    circleSize = 64; // tablet
+    circleSize = 64;
   }
+  console.log("circleSize is:", circleSize);
   return (
     <div className="page-wrapper">
       <div className="main-categories-div">
@@ -27,7 +28,9 @@ function CategorySelect({ onBack, onSelectCategory }) {
             size={circleSize}
             onClick={onBack}
             className="back-button-circle"
+            
           >
+            
             <img
               src="/images/icon-back.svg"
               alt="Back"
