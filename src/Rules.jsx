@@ -37,9 +37,9 @@ function Rules({ setScreen }) {
 
       <div className="rules-container">
         <div className="rule-box">
-          <h1 className="rule-number1">01</h1>
+          <h1 className="rule-number">01</h1>
           <div className="rule-text">
-            <strong className="rule-title">CHOOSE A CATEGORY</strong>
+            <h2 className="rule-title">CHOOSE A CATEGORY</h2>
             <p className="rule-p">
               First, choose a word category, like animals or movies. The
               computer then randomly selects a secret word from that topic and
@@ -51,7 +51,7 @@ function Rules({ setScreen }) {
         <div className="rule-box">
           <h1 className="rule-number">02</h1>
           <div className="rule-text">
-            <strong className="rule-title">GUESS LETTERS</strong>
+            <h2 className="rule-title">GUESS LETTERS</h2>
             <p className="rule-p">
               Take turns guessing letters. The computer fills in the relevant
               blank spaces if your guess is correct. If it's wrong, you lose

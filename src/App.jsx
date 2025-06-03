@@ -44,7 +44,7 @@ function Home({ setScreen }) {
             }
           }}
         >
-          <h1 className="home-h1">How To Play</h1>
+          <h1 className="home-h1">HOW TO PLAY</h1>
         </div>
       </div>
     </div>
