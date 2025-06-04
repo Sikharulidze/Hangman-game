@@ -332,6 +332,7 @@ body,
 .heart-icon {
   width: 53px;
   height: 48px;
+  margin-left: 25px;
 }
 
 .progress-bar {
@@ -342,8 +343,7 @@ body,
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  margin-left: 489px;
-  margin-right: 40px;
+  margin-left: auto;
 }
 
 .fill {
@@ -1006,14 +1006,6 @@ body,
     border-radius: 10px;
   }
 
-  .game-header {
-    width: 100vw;
-    display: flex;
-    gap: 45px;
-   height: auto;
-   align-items: flex-start;
-  }
-
   .game-circle .gradient-svg {
     width: 45px;
     height: 45px;
@@ -1039,12 +1031,20 @@ body,
     color: white;
   }
 
+  .game-header {
+    width: 100vw;
+    display: flex;
+    gap: 15px;
+    height: auto;
+    align-items: flex-start;
+  }
+
   .progress-bar {
     width: 57px;
     height: 16px;
     margin: 0;
     margin-top: 10px;
-    
+    margin-left: 50px;
   }
 
   .fill {
@@ -1056,7 +1056,7 @@ body,
   }
 
   .heart-icon {
-   margin-top: 5px;
+    margin-top: 5px;
     height: 24px;
     width: 26px;
   }
@@ -1069,7 +1069,7 @@ body,
     margin-top: 0;
   }
 
-  .paused-menu{
+  .paused-menu {
     width: 324px;
     height: 410px;
   }

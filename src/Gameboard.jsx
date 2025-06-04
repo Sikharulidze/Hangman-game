@@ -7,7 +7,7 @@ function GameBoard({
   onQuit,
   goToCategory,
   onContinueGame,
-   onPlayAgain,
+  onPlayAgain,
 }) {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
@@ -41,7 +41,7 @@ function GameBoard({
   }, [isWin, isLose, gameEnded]);
 
   const handlePlayAgain = () => {
-    onPlayAgain();   
+    onPlayAgain();
     setGuessedLetters([]);
     setWrongGuesses(0);
     setGameEnded(false);
@@ -72,8 +72,8 @@ function GameBoard({
             className="fill"
             style={{
               width: `${
-                ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 140
-              }px`,
+                ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 100
+              }%`,
             }}
           />
         </div>
@@ -192,9 +192,7 @@ function GameBoard({
                   return <div key={idx} className="letter-box space-box" />;
                 }
 
-                const isGuessed = guessedLetters.includes(
-                  letter.toUpperCase()
-                );
+                const isGuessed = guessedLetters.includes(letter.toUpperCase());
 
                 return (
                   <div
