@@ -54,7 +54,7 @@ function GameBoard({
       <div className="game-header">
         <GradientCircle
           size={94}
-          className="menu-circle"
+          className="menu-circle game-circle gameboard-menu"
           onClick={() => setMenuOpen(true)}
         >
           <img

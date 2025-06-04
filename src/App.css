@@ -284,6 +284,7 @@ body,
 }
 
 /* === GameBoard Header Styles === */
+
 .game-header {
   display: flex;
   justify-content: center;
@@ -975,5 +976,101 @@ body,
 
   .category-item {
     font-size: 1.3rem;
+  }
+
+  /* for game pages*/
+
+  .keyboard-container {
+    width: 324px;
+    height: 216px;
+  }
+
+  .keyboard-letter-box {
+    width: 28px;
+    height: 56px;
+    border-radius: 10px;
+  }
+
+  .keyboard-letter-text {
+    font-size: 1rem;
+  }
+
+  .word-display {
+    width: 324px;
+    height: 144px;
+  }
+
+  .letter-box {
+    width: 35px;
+    height: 66px;
+    border-radius: 10px;
+  }
+
+  .game-header {
+    width: 100vw;
+    display: flex;
+    gap: 45px;
+   height: auto;
+   align-items: flex-start;
+  }
+
+  .game-circle .gradient-svg {
+    width: 45px;
+    height: 45px;
+  }
+
+  .gameboard-menu {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    margin: 0;
+  }
+
+  .menu-icon-inside {
+    width: 17px;
+    height: 17px;
+    margin-bottom: 45px;
+    margin-right: 48px;
+  }
+
+  .game-header .category-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .progress-bar {
+    width: 57px;
+    height: 16px;
+    margin: 0;
+    margin-top: 10px;
+    
+  }
+
+  .fill {
+    max-width: 48px;
+    height: 8px;
+    top: 25%;
+    left: 4px;
+    border-radius: 6px;
+  }
+
+  .heart-icon {
+   margin-top: 5px;
+    height: 24px;
+    width: 26px;
+  }
+
+  .guess-title {
+    font-size: 34px;
+    margin-left: 5px;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+  }
+
+  .paused-menu{
+    width: 324px;
+    height: 410px;
   }
 }
