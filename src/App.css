@@ -287,11 +287,20 @@ body,
 
 .game-header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 1216px;
+  width: 100%;
   height: 106px;
+  max-width: 1216px;
   margin: 0 auto;
+  padding: 0 74px;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+  margin-left: auto;
 }
 
 .game-header .left {
@@ -332,7 +341,6 @@ body,
 .heart-icon {
   width: 53px;
   height: 48px;
-  margin-left: 25px;
 }
 
 .progress-bar {
@@ -357,7 +365,7 @@ body,
   width: 243px;
   font-size: 88px;
   height: 106px;
-  margin-left: 57px;
+  margin-left: 20px;
 }
 
 .word-display {
@@ -597,11 +605,18 @@ body,
   /* for each category page*/
 
   .game-header {
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     max-width: 680px;
     height: auto;
-    flex-wrap: wrap;
-    padding-bottom: 40px;
+    margin: 0 auto;
+    padding: 0 16px 40px 16px;
+  }
+
+  .right-side {
+    gap: 0;
   }
 
   .menu-circle {

@@ -67,6 +67,7 @@ function GameBoard({
         <h2 className="guess-title">{category}</h2>
 
         {/* UPDATED PROGRESS BAR */}
+        <div className="right-side">
         <div className="progress-bar">
           <div
             className="fill"
@@ -83,6 +84,7 @@ function GameBoard({
           alt="Heart Icon"
           className="heart-icon"
         />
+        </div>
       </div>
 
       {/* PAUSE POPUP */}
