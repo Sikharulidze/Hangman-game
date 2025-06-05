@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CategorySelect from "./CategorySelect";
 import GameBoard from "./Gameboard";
-import data from "./data.json";
 import Rules from "./Rules";
 import "./App.css";
 import GradientCircle from "./GradientCircle";
@@ -52,18 +51,28 @@ function Home({ setScreen }) {
 }
 
 function App() {
-  const formattedCategories = Object.entries(data.categories).map(
-    ([categoryName, items]) => ({
-      name: categoryName,
-      words: items.map((item) => item.name),
-    })
-  );
-
-  const [categories, setCategories] = useState(formattedCategories);
+  const [categories, setCategories] = useState([]);
   const [screen, setScreen] = useState("home");
   const [category, setCategory] = useState(null);
   const [usedWords, setUsedWords] = useState([]);
   const [currentWordd, setCurrentWordd] = useState("");
+
+  useEffect(() => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((json) => {
+        const formatted = Object.entries(json.categories).map(
+          ([categoryName, items]) => ({
+            name: categoryName,
+            words: items.map((item) => item.name),
+          })
+        );
+        setCategories(formatted);
+      })
+      .catch((err) => {
+        console.error("Failed to load data.json", err);
+      });
+  }, []);
 
   const getNewWordFromCategory = (selectedCategory = category) => {
     if (!selectedCategory) return "";
