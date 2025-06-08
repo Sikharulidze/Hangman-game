@@ -24,8 +24,8 @@ function GradientCircle({ size = 160, children, onClick, className = "" }) {
 
           <linearGradient id="grad-hover" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#E6C6FF" />{" "}
-            {/* lighter purple / white mixed */}
-            <stop offset="100%" stopColor="#B8A3FF" /> {/* lighter purple */}
+         
+            <stop offset="100%" stopColor="#B8A3FF" /> 
           </linearGradient>
 
           <filter id="outerShadow" x="-20%" y="-20%" width="140%" height="140%">

@@ -13,12 +13,12 @@ function Rules({ setScreen }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  let circleSize = 94; // default for desktop
+  let circleSize = 94;
 
   if (viewportWidth <= 767) {
-    circleSize = 40; // mobile
+    circleSize = 40;
   } else if (viewportWidth >= 768 && viewportWidth <= 1024) {
-    circleSize = 64; // tablet
+    circleSize = 64;
   }
 
   return (

@@ -66,28 +66,26 @@ function GameBoard({
 
         <h2 className="guess-title">{category}</h2>
 
-        {/* UPDATED PROGRESS BAR */}
         <div className="right-side">
-        <div className="progress-bar">
-          <div
-            className="fill"
-            style={{
-              width: `${
-                ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 100
-              }%`,
-            }}
-          />
-        </div>
+          <div className="progress-bar">
+            <div
+              className="fill"
+              style={{
+                width: `${
+                  ((maxWrongGuesses - wrongGuesses) / maxWrongGuesses) * 100
+                }%`,
+              }}
+            />
+          </div>
 
-        <img
-          src="/images/icon-heart.svg"
-          alt="Heart Icon"
-          className="heart-icon"
-        />
+          <img
+            src="/images/icon-heart.svg"
+            alt="Heart Icon"
+            className="heart-icon"
+          />
         </div>
       </div>
 
-      {/* PAUSE POPUP */}
       {menuOpen && (
         <>
           <div className="game-overlay"></div>
@@ -126,7 +124,6 @@ function GameBoard({
         </>
       )}
 
-      {/* GAME END SCREEN */}
       {gameEnded && (
         <>
           <div className="game-overlay"></div>
@@ -180,7 +177,6 @@ function GameBoard({
         </>
       )}
 
-      {/* WORD DISPLAY */}
       <div className="word-display">
         {(() => {
           const middleIndex = Math.floor(displayedWordArray.length / 2);
@@ -219,7 +215,6 @@ function GameBoard({
         })()}
       </div>
 
-      {/* KEYBOARD */}
       <div
         className="keyboard-container"
         style={{
